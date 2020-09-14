@@ -11,6 +11,7 @@
     "axios": "^0.20.0",
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^1.0.0",
+    "env-cmd": "^10.1.0",
     "express": "^4.17.1",
     "http-proxy-middleware": "^1.0.5",
     "less": "^3.12.2",
@@ -30,8 +31,8 @@
     "swiper": "^6.1.2"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": " env-cmd -e dev react-app-rewired start",
+    "build": "env-cmd -e prod react-app-rewired build",
     "test": "react-app-rewired test",
     "server": "node ./server/server.js"
   },

@@ -4,9 +4,10 @@ import { ShowLoading, HideLoding } from '../components/loading'
 
 class Http {
     constructor() {
+        console.log(process.env)
         this.$http = axios.create()
         this.$http.defaults.timeout = 10000
-        this.$http.defaults.baseURL = ''
+        this.$http.defaults.baseURL = process.env.KG_API_URL ||''
         this.$http.defaults.headers = {
             "Content-Type": 'application/json;charset=UTF-8',
             //"Content-Type": 'application/x-www-form-urlencoded;charset=UTF-8',
