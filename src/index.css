@@ -14,6 +14,12 @@ i,b,textarea,button,input,label,select,figure,figcaption,iframe{
     -webkit-font-smoothing:antialiased;
 }
 
+#root >div {    
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 #root,.App{
     height: 100%;
 } 

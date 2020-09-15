@@ -1,10 +1,11 @@
-import React, { useState,useEffect } from 'react'
-import { withRouter,useRouteMatch } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { withRouter, useRouteMatch } from 'react-router-dom'
 import { Input, Menu } from 'antd'
+import { NAV_URL } from '../../constants/enum'
 import './index.less'
 const { Search } = Input
 const Header = props => {
-    const {url} = useRouteMatch()
+    const { url } = useRouteMatch()
     const [current, setCurrent] = useState('newSong')
     const windowHref = window.location.href
     const handelSearch = (value) => {
@@ -12,25 +13,29 @@ const Header = props => {
         console.log(props)
     }
 
-    const handleUrl = url => url && url.split('/')[3]
-   
-    useEffect(()=>{
-        if(windowHref){
+    const handleUrl = urls => urls && urls.split('/')[3]
+
+    useEffect(() => {
+        if (windowHref) {
             let currentUrl = handleUrl(windowHref) || 'newSong'
             setCurrent(currentUrl)
         }
-    },[windowHref])
+    }, [windowHref])
 
     const handleClick = event => {
         // props.history.push(`${props.match.url}${event.key}`)
-        if(event.key === 'newSong'){
-            props.history.push('/')
-            return 
-        }
+        // if(event.key === 'newSong'){
+        //     props.history.push('/')
+        //     return 
+        // }
+        if(event.key === current) return
         props.history.push(`${url}${event.key}`)
     }
-    
-    console.log('currentUrl',current)
+
+    const UpperCode = key => `${key.slice(0, 1).toUpperCase()}${key.slice(1)}`
+
+    console.log('currentUrl', current)
+
 
     return (
         <div className='headerContent'>
@@ -44,18 +49,9 @@ const Header = props => {
             </header>
             <nav>
                 <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-                    <Menu.Item key="newSong" >
-                        NewSong
-                    </Menu.Item>
-                    <Menu.Item key="rank" >
-                        Rank
-                    </Menu.Item>
-                    <Menu.Item key="songList" >
-                        SongList
-                    </Menu.Item>
-                    <Menu.Item key="songer" >
-                        Songer
-                    </Menu.Item>
+                    {
+                        NAV_URL.map(item => <Menu.Item key={item}> {UpperCode(item)} </Menu.Item>)
+                    }
                 </Menu>
             </nav>
         </div>
