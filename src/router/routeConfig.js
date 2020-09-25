@@ -5,6 +5,7 @@ import NewSong from '../pages/NewSong'
 import Rank from '../pages/Rank'
 import SongList from '../pages/SongList'
 import Songer from '../pages/Songer'
+import RankDetail from '../pages/RankDetail'
 
 //路由配置
 const routeConfig = [
@@ -18,6 +19,11 @@ const routeConfig = [
         path: '/Login',
         extct: true,
         component: Login
+    },
+    {
+        path: '/RankDetail/:id',
+        exact: true,
+        component: RankDetail
     },
     {
         //顶级路由
