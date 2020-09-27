@@ -2,10 +2,11 @@ import { all, put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects'
 import homeRoutine from '../routines/home'
 import videoRoutine from '../routines/videoPlay'
 import rankRoutine from '../routines/rank'
+import rankDetailRoutine from '../routines/rankDetail'
 import { getNewSongServerData } from '../../http/API/NewSong'
 import { getSongInfoData } from '../../http/API/SongInfo'
-
 import { getRankServerData } from '../../http/API/RANK'
+import { getRankDetailServerData } from '../../http/API/RankDetail'
 
 function* watchHome() {
     yield takeLatest(homeRoutine.TRIGGER, fetchNewSongServerData)
@@ -58,29 +59,46 @@ function* watchRank() {
     yield takeLatest(rankRoutine.TRIGGER, fethRankServerData)
 }
 
-function* fethRankServerData() {
+function* fethRankServerData(action) {
     try {
         yield put(rankRoutine.request())
-        const rankData =  yield call(getRankServerData)
+        const rankData = yield call(getRankServerData)
         console.log(rankData)
         yield put(rankRoutine.success(rankData))
     } catch (error) {
         yield put(rankRoutine.failure(error.message))
-    } finally{
+    } finally {
         yield put(rankRoutine.fulfill())
     }
 }
 
 //rankDetail
-
-function* watchRankDetail(){
-    yield takeLatest()
+function* watchRankDetail() {
+    yield takeLatest(rankDetailRoutine.TRIGGER, getRankDetailData)
 }
+function* getRankDetailData({rankid,curPage,totalPage,json,goToRankDetail}) {
+    try {
+        yield put(rankDetailRoutine.request())
+        const rankDetailData = yield call(getRankDetailServerData,{rankid,curPage,totalPage,json})
+        console.log('排名详情',rankDetailData)
+        yield put(rankDetailRoutine.success(rankDetailData))
+        typeof goToRankDetail === 'function' && goToRankDetail(rankDetailData)
+    } catch (error) {
+        yield put(rankDetailRoutine.failure(error.message))
+    } finally{
+        yield put(rankDetailRoutine.fulfill())
+    }
+   
+
+    
+}
+
 
 export default function* rootSaga() {
     yield all([
         fork(watchHome),
         fork(watchVideoPlay),
-        fork(watchRank)
+        fork(watchRank),
+        fork(watchRankDetail)
     ])
 }

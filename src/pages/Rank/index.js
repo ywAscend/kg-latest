@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react'
-import rankRoutine from '../../store/routines/rank'
+import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import rankRoutine from '../../store/routines/rank'
+import rankDetailRoutine from '../../store/routines/rankDetail'
 import { RightOutlined } from '@ant-design/icons'
 import { ImgUrlFiter } from '../../utils'
 import './index.less'
 const Rank = props => {
+    const [rankid,setRankid] = useState('')
     const dispatch = useDispatch()
     const rankData = useSelector(state => state.rankReducer.rankList)
     useEffect(() => {
@@ -12,11 +14,26 @@ const Rank = props => {
             type: rankRoutine.TRIGGER
         })
     }, [])
-    const handleRankClick = rankid => {
-        console.log(`rankid:${rankid}`)
-        console.log(props)
-        //先请求接口，然后跳转详情页面
-        props.history.push(`/RankDetail/${rankid}`)
+    
+    const goToRankDetail = (data) => {
+        if( data.info && data.songs) {
+            props.history.push(`/RankDetail/${rankid}`)
+        } else {
+            alert('请求数据失败')
+        }
+    }
+
+    const handleRankClick = (rankId) => {
+        console.log(`rankid:${rankId}`)
+        setRankid(rankId)
+        dispatch({
+            type: rankDetailRoutine.TRIGGER,
+            rankid,
+            curPage:1,
+            totalPage:2,
+            json:true,
+            goToRankDetail
+        })
     }
     const renderList = () => {
         const { list } = rankData

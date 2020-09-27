@@ -2,15 +2,26 @@ import rankDetailRoutine from '../../routines/rankDetail'
 
 const initRankDetailState = {
     isLoading: false,
-    rankDetailList:''
+    rankDetailInfo:''
 }
 
 const rankDetailReudcer = (state = initRankDetailState, action) => {
     switch(action.type) {
         case rankDetailRoutine.TRIGGER:
             return {
-                isLoading: true,
-                ...state
+                ...state,
+                isLoading: true
+            }
+        case rankDetailRoutine.SUCCESS:
+        case rankDetailRoutine.FAILURE:
+            return {
+                ...state,
+                rankDetailInfo: action.payload
+            }
+        case rankDetailRoutine.FULFILL:
+            return {
+                ...state,
+                isLoading:false
             }
         default:
             return state
