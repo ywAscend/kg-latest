@@ -48,8 +48,8 @@ export default title => WrappedComponent => {
         getNextMusicParam = () => {
             const { musicIndex, playDatas } = this.props
             const nextNum = musicIndex + 1
-            const nextMusicIndex = nextNum > playDatas.length ? 0 : nextNum
-            const nextHash = playDatas[nextNum].hash
+            const nextMusicIndex = nextNum >= playDatas.length ? 0 : nextNum
+            const nextHash = playDatas[nextMusicIndex].hash
 
             console.log('下一曲索引', nextMusicIndex, nextHash)
             return {
