@@ -82,6 +82,7 @@ function* getRankDetailData({rankid,curPage,totalPage,json,goToRankDetail}) {
         const rankDetailData = yield call(getRankDetailServerData,{rankid,curPage,totalPage,json})
         console.log('排名详情',rankDetailData)
         yield put(rankDetailRoutine.success(rankDetailData))
+        yield put(videoRoutine.fulfill({data:rankDetailData.songs.list}))
         typeof goToRankDetail === 'function' && goToRankDetail(rankDetailData)
     } catch (error) {
         yield put(rankDetailRoutine.failure(error.message))
