@@ -5,5 +5,7 @@ export const URL_ENUM = {
     //NEW_SONG: '/api/newSong' //新歌列表--server.js提供数据
     SONG_INFO: '/api/app/i/getSongInfo.php?cmd=playInfo',  //歌曲信息
     RANK_INFO: '/api/rank/list&json=true', //排名
-    RANK_DETAIL_INFO: '/api/rank/info'
+    RANK_DETAIL_INFO: '/api/rank/info', //排名详情
+    SONG_LIST_INFO: '/api/plist/index&json=true', //歌单
+    SONG_LSIT_DETAIL_INFO: '/api/plist/list'
 }

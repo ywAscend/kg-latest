@@ -5,19 +5,20 @@ import NewSong from '../pages/NewSong'
 import Rank from '../pages/Rank'
 import SongList from '../pages/SongList'
 import Songer from '../pages/Songer'
-import RankDetail from '../pages/RankDetail'
+import RankDetail from '../pages/RankDetail' 
+import SongListDetail from '../pages/SongListDetail'
 
 //路由配置
 const routeConfig = [
     {
         //404
         path: '/404',
-        extct: true,
+        exact: true,
         component: NotFound
     },
     {
         path: '/Login',
-        extct: true,
+        exact: true,
         component: Login
     },
     {
@@ -26,30 +27,34 @@ const routeConfig = [
         component: RankDetail
     },
     {
+        path:'/SongList/:id',
+        exact: true,
+        component: SongListDetail
+    },
+    {
         //顶级路由
         path: '/',
-        extct: true,
         component: Home,
         routes: [
             //一级路由
             {
                 path: '/newSong',
-                extct: true,
+                exact: true,
                 component: NewSong
             },
             {
                 path: '/rank',
-                extct: true,
+                exact: true,
                 component: Rank
             },
             {
                 path: '/songList',
-                extct: true,
+                exact: true,
                 component: SongList
             },
             {
                 path: '/songer',
-                extct: true,
+                exact: true,
                 component: Songer
             },
         ]

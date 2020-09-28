@@ -1,35 +1,40 @@
-.rank{
-    ul{
+.songList {
+    height: 100%;
+    .songListContent {
         padding: 10px;
-        li {
-            border-bottom: 1px solid #ccc;
+        li{
             min-height: 100px;
             padding: 10px 0;
+            border-bottom: 1px solid #ccc;
             display: flex;
             justify-content: space-between;
             align-items: center;
             &:first-child{
                 padding-top: 0;
             }
-            .detailBox{
+            .detailConent{
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 .imgContent {
-                    height:125px;
-                    width:125px;
+                    height:100px;
+                    width:100px;
                     img{
                         height: 100%;
                         width: 100%;
                     }
                 }
-                .rankName {
+                .specialname {
                     margin-left: 10px;
-                    font-size: 20px;
-                    
+                    font-size: 15px;
+                    .playcount{
+                        font-size: 15px;
+                        color: grey;
+                        margin-left: 3px;
+                    }
                 }
+                
             }
-            
         }
     }
 }

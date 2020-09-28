@@ -3,10 +3,14 @@ import homeRoutine from '../routines/home'
 import videoRoutine from '../routines/videoPlay'
 import rankRoutine from '../routines/rank'
 import rankDetailRoutine from '../routines/rankDetail'
+import songListRoutine from '../routines/songList'
+import songListDetailRoutine from '../routines/songListDetail'
 import { getNewSongServerData } from '../../http/API/NewSong'
 import { getSongInfoData } from '../../http/API/SongInfo'
 import { getRankServerData } from '../../http/API/RANK'
 import { getRankDetailServerData } from '../../http/API/RankDetail'
+import { getSongListServerData } from '../../http/API/SongList'
+import { getSongListDetailServerData } from '../../http/API/SongListDetail'
 
 function* watchHome() {
     yield takeLatest(homeRoutine.TRIGGER, fetchNewSongServerData)
@@ -34,7 +38,7 @@ function* fetchNewSongServerData() {
 
 //设置video数据
 function* watchVideoPlay() {
-    yield takeEvery(videoRoutine.TRIGGER, updateVideoPlay)
+    yield takeLatest(videoRoutine.TRIGGER, updateVideoPlay)
 }
 
 function* updateVideoPlay(action) {
@@ -76,22 +80,57 @@ function* fethRankServerData(action) {
 function* watchRankDetail() {
     yield takeLatest(rankDetailRoutine.TRIGGER, getRankDetailData)
 }
-function* getRankDetailData({rankid,curPage,totalPage,json,goToRankDetail}) {
+function* getRankDetailData({ rankid, curPage, totalPage, json, goToRankDetail }) {
     try {
         yield put(rankDetailRoutine.request())
-        const rankDetailData = yield call(getRankDetailServerData,{rankid,curPage,totalPage,json})
-        console.log('排名详情',rankDetailData)
+        const rankDetailData = yield call(getRankDetailServerData, { rankid, curPage, totalPage, json })
+        console.log('排名详情', rankDetailData)
         yield put(rankDetailRoutine.success(rankDetailData))
-        yield put(videoRoutine.fulfill({data:rankDetailData.songs.list}))
+        const songList = (rankDetailData.songs && rankDetailData.songs.list || '')
+        yield put(videoRoutine.fulfill({ data: songList }))
         typeof goToRankDetail === 'function' && goToRankDetail(rankDetailData)
     } catch (error) {
         yield put(rankDetailRoutine.failure(error.message))
-    } finally{
+    } finally {
         yield put(rankDetailRoutine.fulfill())
     }
-   
+}
 
-    
+//songList
+function* watchSongList() {
+    yield takeLatest(songListRoutine.TRIGGER, getSongListData)
+}
+function* getSongListData() {
+    try {
+        yield put(songListRoutine.request())
+        const songListData = yield call(getSongListServerData)
+        console.log('歌单', songListData)
+        yield put(songListRoutine.success(songListData))
+
+    } catch (error) {
+        yield put(songListRoutine.failure(error.message))
+    } finally {
+        yield put(songListRoutine.fulfill())
+    }
+}
+
+//songListDetail
+function* wathSongListDetail() {
+    yield takeLatest(songListDetailRoutine.TRIGGER, getSongListDetailData)
+}
+function* getSongListDetailData({ specialid, goToSongListDetail }) {
+    try {
+        yield put(songListDetailRoutine.request())
+        const songListDetailData = yield call(()=>getSongListDetailServerData(specialid))
+        console.log('歌单详情', songListDetailData)
+        yield put (songListDetailRoutine.success(songListDetailData))
+        yield put(videoRoutine.fulfill({ data: songListDetailData.list.list.info }))
+        typeof goToSongListDetail === 'function' && goToSongListDetail(songListDetailData)
+    } catch (error) {
+        yield put(songListDetailRoutine.failure(error.message))
+    } finally {
+        yield put(songListDetailRoutine.fulfill())
+    }
 }
 
 
@@ -100,6 +139,8 @@ export default function* rootSaga() {
         fork(watchHome),
         fork(watchVideoPlay),
         fork(watchRank),
-        fork(watchRankDetail)
+        fork(watchRankDetail),
+        fork(watchSongList),
+        fork(wathSongListDetail)
     ])
 }

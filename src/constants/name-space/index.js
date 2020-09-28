@@ -3,7 +3,9 @@ const NAME_SPACE = {
     HOME: 'kg-home',
     VIDEO: 'kg-video',
     RANK: 'kg-rank',
-    RANK_DETAIL: 'kg-rankDetail'
+    RANK_DETAIL: 'kg-rankDetail',
+    SONG_LIST: 'kg-songList',
+    SONG_LIST_DETAIL:'kg-songListDetail'
 }
 
 export default NAME_SPACE

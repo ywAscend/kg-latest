@@ -1,11 +1,11 @@
 import React, {useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
+import videoRoutine from '../../store/routines/videoPlay'
+import { ImgUrlFiter } from '../../utils'
 import { LeftOutlined } from '@ant-design/icons'
 import SearchCom from '../../components/search'
 import MusicList from '../../components/musicList'
 import VideoPlayer from '../../components/videoPlayer'
-import videoRoutine from '../../store/routines/videoPlay'
-import { ImgUrlFiter } from '../../utils'
 import './index.less'
 
 const RankDetail = props => {
@@ -13,7 +13,7 @@ const RankDetail = props => {
     const [playFlag, setPlayFlag] = useState(false)
     const rankDetailData = useSelector(state => state.rankDetailReudcer.rankDetailInfo)
     const { info, songs } = rankDetailData
-    const updateTime = () => songs && songs.list[0].addtime.slice(0, 10) || ''
+    const updateTime = () => (songs && songs.list[0].addtime.slice(0, 10) || '')
 
     const handlePlayFlag = (index,hash) => {
       setPlayFlag(true)
