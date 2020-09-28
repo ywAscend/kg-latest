@@ -38,7 +38,7 @@ const routeConfig = [
         routes: [
             //一级路由
             {
-                path: '/newSong',
+                path: '/',
                 exact: true,
                 component: NewSong
             },

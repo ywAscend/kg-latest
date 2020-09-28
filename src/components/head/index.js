@@ -20,11 +20,12 @@ const Header = props => {
 
     const handleClick = event => {
         // props.history.push(`${props.match.url}${event.key}`)
-        // if(event.key === 'newSong'){
-        //     props.history.push('/')
-        //     return 
-        // }
+        
         if(event.key === current) return
+        if(event.key === 'newSong'){
+            props.history.push('/')
+            return 
+        }
         props.history.push(`${url}${event.key}`)
     }
 

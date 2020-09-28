@@ -3,10 +3,6 @@ import { renderRoutes } from 'react-router-config'
 import Header from '../../components/head'
 const Home = props => {
 
-    useEffect(() =>{
-        props.history.push('/newSong')
-    },[])
-
     return (
         <div>
             <Header/>

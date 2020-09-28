@@ -9,7 +9,6 @@ import { LeftOutlined, DownCircleOutlined, UpCircleOutlined } from '@ant-design/
 import './index.less'
 
 // const imgurl = 'http://c1.kgimg.com/custom/{size}/20200923/20200923204047361716.jpg'
-// const intro = '走进古代历史人物的世界，去聆听他们的故事，去感受他们的态度和情感。 他们的风采惊艳了时光，古代历史人物的传奇事件，你又知多少？且听！ 出镜：竹大宝Chiki 摄影：阿喵_帅不过三秒 （封面已授权）'
 
 const SongListDetail = props => {
     const dispatch = useDispatch()
