@@ -37,7 +37,7 @@ const SongListDetail = props => {
                     <p className='specialName'>{info.list.specialname}</p>
                 </div>
                 <div className='detailContent'>
-                    <img src={ImgUrlFiter(info.list.imgurl)} />
+                    <img src={ImgUrlFiter(info.list.imgurl)} alt='' />
                 </div>
                 <div className='listContent'>
                     <div className={`acticleCommon ${arrowFlag ? 'upacticleContent' : 'acticleContent'}`}>

@@ -4,7 +4,7 @@ import Home from '../pages/Home'
 import NewSong from '../pages/NewSong'
 import Rank from '../pages/Rank'
 import SongList from '../pages/SongList'
-import Songer from '../pages/Songer'
+import Singer from '../pages/Singer'
 import RankDetail from '../pages/RankDetail' 
 import SongListDetail from '../pages/SongListDetail'
 
@@ -53,9 +53,9 @@ const routeConfig = [
                 component: SongList
             },
             {
-                path: '/songer',
+                path: '/singer',
                 exact: true,
-                component: Songer
+                component: Singer
             },
         ]
     }

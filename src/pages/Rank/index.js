@@ -13,6 +13,7 @@ const Rank = props => {
         dispatch({
             type: rankRoutine.TRIGGER
         })
+    // eslint-disable-next-line
     }, [])
     
     const goToRankDetail = (data) => {

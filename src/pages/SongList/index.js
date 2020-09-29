@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import songListRoutine from '../../store/routines/songList'
 import songListDetailRoutine from '../../store/routines/songListDetail'
@@ -16,10 +16,11 @@ const SongList = props => {
         dispatch({
             type: songListRoutine.TRIGGER
         })
+    // eslint-disable-next-line
     }, [])
-    useEffect(()=>{
+    useEffect(() => {
         statusRef.current = specialId
-    },[specialId])
+    }, [specialId])
 
     const goToSongListDetail = (data) => {
         if (data.info && data.list) {

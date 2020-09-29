@@ -1,4 +1,4 @@
-export const NAV_URL = ['newSong', 'rank', 'songList', 'songer']
+export const NAV_URL = ['newSong', 'rank', 'songList', 'singer']
 
 export const URL_ENUM = {
     NEW_SONG: '/api/?json=true', //新歌列表
@@ -7,5 +7,6 @@ export const URL_ENUM = {
     RANK_INFO: '/api/rank/list&json=true', //排名
     RANK_DETAIL_INFO: '/api/rank/info', //排名详情
     SONG_LIST_INFO: '/api/plist/index&json=true', //歌单
-    SONG_LSIT_DETAIL_INFO: '/api/plist/list'
+    SONG_LSIT_DETAIL_INFO: '/api/plist/list',//歌单详情
+    SINGER_INFO: '/api/singer/class&json=true'
 }

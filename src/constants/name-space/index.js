@@ -5,7 +5,8 @@ const NAME_SPACE = {
     RANK: 'kg-rank',
     RANK_DETAIL: 'kg-rankDetail',
     SONG_LIST: 'kg-songList',
-    SONG_LIST_DETAIL:'kg-songListDetail'
+    SONG_LIST_DETAIL:'kg-songListDetail',
+    SINGER:'kg-singer'
 }
 
 export default NAME_SPACE

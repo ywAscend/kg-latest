@@ -1,16 +1,18 @@
-import { all, put, call, fork, takeLatest, takeEvery } from 'redux-saga/effects'
+import { all, put, call, fork, takeLatest } from 'redux-saga/effects'
 import homeRoutine from '../routines/home'
 import videoRoutine from '../routines/videoPlay'
 import rankRoutine from '../routines/rank'
 import rankDetailRoutine from '../routines/rankDetail'
 import songListRoutine from '../routines/songList'
 import songListDetailRoutine from '../routines/songListDetail'
+import singerRoutine from '../routines/singer'
 import { getNewSongServerData } from '../../http/API/NewSong'
 import { getSongInfoData } from '../../http/API/SongInfo'
 import { getRankServerData } from '../../http/API/RANK'
 import { getRankDetailServerData } from '../../http/API/RankDetail'
 import { getSongListServerData } from '../../http/API/SongList'
 import { getSongListDetailServerData } from '../../http/API/SongListDetail'
+import { getSingerInfoData } from '../../http/API/Singer'
 
 function* watchHome() {
     yield takeLatest(homeRoutine.TRIGGER, fetchNewSongServerData)
@@ -121,9 +123,9 @@ function* wathSongListDetail() {
 function* getSongListDetailData({ specialid, goToSongListDetail }) {
     try {
         yield put(songListDetailRoutine.request())
-        const songListDetailData = yield call(()=>getSongListDetailServerData(specialid))
+        const songListDetailData = yield call(() => getSongListDetailServerData(specialid))
         console.log('歌单详情', songListDetailData)
-        yield put (songListDetailRoutine.success(songListDetailData))
+        yield put(songListDetailRoutine.success(songListDetailData))
         yield put(videoRoutine.fulfill({ data: songListDetailData.list.list.info }))
         typeof goToSongListDetail === 'function' && goToSongListDetail(songListDetailData)
     } catch (error) {
@@ -133,6 +135,24 @@ function* getSongListDetailData({ specialid, goToSongListDetail }) {
     }
 }
 
+//singer
+function* watchSinger() {
+    yield takeLatest(singerRoutine.TRIGGER, getSingerServerData)
+}
+function* getSingerServerData() {
+    try {
+        yield put(singerRoutine.request())
+        const singerInfo = yield call(getSingerInfoData)
+        console.log('0000', singerInfo)
+        yield put(singerRoutine.success(singerInfo))
+    } catch (error) {
+        yield put(singerRoutine.failure(error.message))
+    } finally {
+        yield put(singerRoutine.fulfill())
+    }
+
+
+}
 
 export default function* rootSaga() {
     yield all([
@@ -141,6 +161,7 @@ export default function* rootSaga() {
         fork(watchRank),
         fork(watchRankDetail),
         fork(watchSongList),
-        fork(wathSongListDetail)
+        fork(wathSongListDetail),
+        fork(watchSinger)
     ])
 }
