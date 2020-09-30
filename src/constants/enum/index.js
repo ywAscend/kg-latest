@@ -8,5 +8,7 @@ export const URL_ENUM = {
     RANK_DETAIL_INFO: '/api/rank/info', //排名详情
     SONG_LIST_INFO: '/api/plist/index&json=true', //歌单
     SONG_LSIT_DETAIL_INFO: '/api/plist/list',//歌单详情
-    SINGER_INFO: '/api/singer/class&json=true'
+    SINGER_INFO: '/api/singer/class&json=true', //歌手
+    SINGER_LIST_INFO: '/api/singer/list', //歌手列表
+    
 }

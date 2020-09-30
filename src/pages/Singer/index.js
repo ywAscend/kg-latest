@@ -9,8 +9,9 @@ const Singer = props => {
     const dispatch = useDispatch()
     const singerData = useSelector(state => state.singerReducer)
     const singerList = SortSinger(singerData.singerInfo)
-    const handleSingerClick = classid => {
-        console.log(classid)
+    const handleSingerClick = ({classid,classname}) => {
+        console.log(classid,classname)
+        props.history.push(`/SingerList/${classid}`,{classname} )
     }
 
     useEffect(() => {
@@ -27,7 +28,7 @@ const Singer = props => {
                 {
                     item.map(items => {
                         return (
-                            <li key={items.classid} onClick={() => handleSingerClick(items.classid)}>
+                            <li key={items.classid} onClick={() => handleSingerClick(items)}>
                                 <span>{items.classname}</span>
                                 <span><RightOutlined style={{ fontSize: '20px', color: '#ccc' }} /></span>
                             </li>

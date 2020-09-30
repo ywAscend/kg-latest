@@ -6,6 +6,7 @@ import rankDetailRoutine from '../routines/rankDetail'
 import songListRoutine from '../routines/songList'
 import songListDetailRoutine from '../routines/songListDetail'
 import singerRoutine from '../routines/singer'
+import singerListRoutine from '../routines/singerList'
 import { getNewSongServerData } from '../../http/API/NewSong'
 import { getSongInfoData } from '../../http/API/SongInfo'
 import { getRankServerData } from '../../http/API/RANK'
@@ -13,6 +14,7 @@ import { getRankDetailServerData } from '../../http/API/RankDetail'
 import { getSongListServerData } from '../../http/API/SongList'
 import { getSongListDetailServerData } from '../../http/API/SongListDetail'
 import { getSingerInfoData } from '../../http/API/Singer'
+import { getSingerListServerData } from '../../http/API/SingerList'
 
 function* watchHome() {
     yield takeLatest(homeRoutine.TRIGGER, fetchNewSongServerData)
@@ -137,9 +139,9 @@ function* getSongListDetailData({ specialid, goToSongListDetail }) {
 
 //singer
 function* watchSinger() {
-    yield takeLatest(singerRoutine.TRIGGER, getSingerServerData)
+    yield takeLatest(singerRoutine.TRIGGER, getSingerDetailData)
 }
-function* getSingerServerData() {
+function* getSingerDetailData() {
     try {
         yield put(singerRoutine.request())
         const singerInfo = yield call(getSingerInfoData)
@@ -150,8 +152,23 @@ function* getSingerServerData() {
     } finally {
         yield put(singerRoutine.fulfill())
     }
+}
 
-
+// singerList
+function* watchSingerList() {
+    yield takeLatest(singerListRoutine.TRIGGER, getSingerListDetailData)
+}
+function* getSingerListDetailData({ id }) {
+    try {
+        yield put(singerListRoutine.request())
+        const singerListData = yield call(() => getSingerListServerData(id))
+        console.log('歌手列表', singerListData)
+        yield put(singerListRoutine.success(singerListData))
+    } catch (error) {
+        yield put(singerListRoutine.failure(error.message))
+    } finally {
+        yield put(singerListRoutine.fulfill())
+    }
 }
 
 export default function* rootSaga() {
@@ -162,6 +179,7 @@ export default function* rootSaga() {
         fork(watchRankDetail),
         fork(watchSongList),
         fork(wathSongListDetail),
-        fork(watchSinger)
+        fork(watchSinger),
+        fork(watchSingerList)
     ])
 }

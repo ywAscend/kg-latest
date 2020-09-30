@@ -7,6 +7,8 @@ import SongList from '../pages/SongList'
 import Singer from '../pages/Singer'
 import RankDetail from '../pages/RankDetail' 
 import SongListDetail from '../pages/SongListDetail'
+import SingerList from '../pages/SingerList'
+import SingerListDetail from '../pages/SingerListDetial'
 
 //路由配置
 const routeConfig = [
@@ -22,14 +24,24 @@ const routeConfig = [
         component: Login
     },
     {
-        path: '/RankDetail/:id',
+        path: '/RankDetail/:rankid',
         exact: true,
         component: RankDetail
     },
     {
-        path:'/SongList/:id',
+        path:'/SongList/:specialId',
         exact: true,
         component: SongListDetail
+    },
+    {
+        path:'/SingerList/:classid',
+        exact: true,
+        component: SingerList
+    },
+    {
+        path: '/SingerListDetail/:singerId',
+        exact:true,
+        component: SingerListDetail
     },
     {
         //顶级路由
