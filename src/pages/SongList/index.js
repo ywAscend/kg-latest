@@ -48,7 +48,7 @@ const SongList = props => {
             return (
                 <li onClick={() => handleSongListClick(item)} key={index}>
                     <div className='detailConent'>
-                        <div className='imgContent'><img src={ImgUrlFiter(item.imgurl)} /></div>
+                        <div className='imgContent'><img src={ImgUrlFiter(item.imgurl)} alt='' /></div>
                         <div className='specialname'>
                             <p>{item.specialname}</p>
                             <p><CustomerServiceOutlined style={{ color: 'grey' }} /><span className='playcount'>{item.playcount}</span></p>

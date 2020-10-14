@@ -9,7 +9,7 @@ import Title from '../../components/title'
 import './index.less'
 
 const SingerList = props => {
-    const { id } = useParams()
+    const { classid } = useParams()
     const singerlistname = _.get(props.location.state,'classname','')
     const dispatch = useDispatch()
     const singerListData = useSelector(state => state.singerListReducer)
@@ -17,12 +17,14 @@ const SingerList = props => {
     useEffect(() => {
         dispatch({
             type: singerListRoutine.TRIGGER,
-            id
+            classid
         })
-    }, [id])
+        console.log(props)
+    }, [classid])
 
     const handleSingerListClick = ({singerid}) => {
         console.log('singerid',singerid)
+        props.history.push(`/SingerListDetail/${singerid}`)
     }
 
     const renderSingerList = () => {

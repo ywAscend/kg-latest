@@ -10,5 +10,6 @@ export const URL_ENUM = {
     SONG_LSIT_DETAIL_INFO: '/api/plist/list',//歌单详情
     SINGER_INFO: '/api/singer/class&json=true', //歌手
     SINGER_LIST_INFO: '/api/singer/list', //歌手列表
+    SINGER_LIST_DETAIL_INGO: '/api/singer/info', //歌手详情
     
 }

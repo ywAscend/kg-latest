@@ -7,7 +7,7 @@ import songListReducer from './songList'
 import songListDetailReducer from './songListDetail'
 import singerReducer from './singer'
 import singerListReducer from './singerList'
-
+import singerListDetailReducer from './singerListDetail'
 const rootReducer = combineReducers({
     homeReducer,
     videoRoutine,
@@ -16,7 +16,8 @@ const rootReducer = combineReducers({
     songListReducer,
     songListDetailReducer,
     singerReducer,
-    singerListReducer
+    singerListReducer,
+    singerListDetailReducer
 })
 
 export default rootReducer
