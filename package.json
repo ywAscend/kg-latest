@@ -33,6 +33,7 @@
     "request": "^2.88.2",
     "swiper": "^6.1.2"
   },
+  "homepage": "./",
   "scripts": {
     "start": " env-cmd -e dev react-app-rewired start",
     "build": "env-cmd -e prod react-app-rewired build",
