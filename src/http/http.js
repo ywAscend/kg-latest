@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {KG_API_URL,KG_DEV_APP_URL} from '../constants/enum'
 import { message } from 'antd'
 import { ShowLoading, HideLoding } from '../components/loading'
 const { NODE_ENV } = process.env
@@ -8,7 +9,7 @@ class Http {
         console.log(process.env)
         this.$http = axios.create()
         this.$http.defaults.timeout = 10000
-        this.$http.defaults.baseURL =  NODE_ENV === 'development' ? '/api' :'http://m.kugou.com'
+        this.$http.defaults.baseURL =  NODE_ENV === 'development' ? KG_DEV_APP_URL : KG_API_URL
         this.$http.defaults.headers = {
             "Content-Type": 'application/json;charset=UTF-8',
             //"Content-Type": 'application/x-www-form-urlencoded;charset=UTF-8',

@@ -1,5 +1,6 @@
 export const NAV_URL = ['newSong', 'rank', 'songList', 'singer']
-
+export const KG_API_URL = 'http://m.kugou.com'
+export const KG_DEV_APP_URL= '/api'
 export const URL_ENUM = {
     NEW_SONG: '/?json=true', //新歌列表
     //NEW_SONG: '/newSong' //新歌列表--server.js提供数据
