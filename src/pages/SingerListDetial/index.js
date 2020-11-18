@@ -20,7 +20,7 @@ const SingerListDetail = props => {
 
 
   return (
-    <div className='singerListDetailContent'>
+    <div className='singerList_Detail'>
       <div className='imgContent'>
         <img src={ImgUrlFiter(singerListDetailInfo.imgurl)} alt='' />
       </div>
