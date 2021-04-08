@@ -9,6 +9,7 @@ import RankDetail from '../pages/RankDetail'
 import SongListDetail from '../pages/SongListDetail'
 import SingerList from '../pages/SingerList'
 import SingerListDetail from '../pages/SingerListDetial'
+import SearchPage from '../pages/Search'
 
 //路由配置
 const routeConfig = [
@@ -42,6 +43,11 @@ const routeConfig = [
         path: '/SingerListDetail/:singerId',
         exact:true,
         component: SingerListDetail
+    },
+    {
+        path:'/Search',
+        exact:true,
+        component: SearchPage
     },
     {
         //顶级路由
