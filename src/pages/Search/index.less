@@ -1,4 +1,47 @@
 .searchContent{
-    border: 1px solid red;
+    // border: 1px solid red;
     background: #fbfbfb;
+    .searchBox{
+      height: 70px;
+      // border: 1px solid red;
+      padding: 10px;
+      .searchBody{
+        height: 50px;
+        // border: 1px solid red;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .searchDetail{
+          border: 1px solid #e5e5e5;
+          height: 40px;
+          flex:.8;
+          overflow: hidden;
+          border-radius: 5px;
+          background-color: white;
+          input{
+            height: inherit;
+            width: 88%;
+          }
+        }
+        .searchBtn{
+          height: 40px;
+          line-height: 40px;
+          flex: .17;
+          text-align: center;
+          background: #e5e5e5;
+          color: #959595;
+          border-radius: 5px;
+          font-size: 20px;
+          font-weight: 400;
+        }
+        .searchFocus{
+          background: #2ba2fa;
+          color: #fff;
+        }
+      }
+    }
+    .searchResult{
+      height: 100%;
+      border: 1px solid red;
+    }
 }
