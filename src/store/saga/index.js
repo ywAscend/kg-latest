@@ -17,7 +17,6 @@ import { getSongListDetailServerData } from '../../http/API/SongListDetail'
 import { getSingerInfoData } from '../../http/API/Singer'
 import { getSingerListServerData } from '../../http/API/SingerList'
 import { getSingerListDetailServerData} from '../../http/API/SingerListDetailInfo'
-import SingerListDetail from '../../pages/SingerListDetial'
 
 function* watchHome() {
   yield takeLatest(homeRoutine.TRIGGER, fetchNewSongServerData)
