@@ -10,5 +10,14 @@ module.exports = app => {
                 '^/api': '/'
             }
         })
+    );
+    app.use(
+        '/searinfo',createProxyMiddleware({
+            target:'http://mobilecdn.kugou.com',
+            changeOrigin:true,
+            pathRewrite: {
+                '^/searinfo': '/'
+            }
+        })
     )
 }

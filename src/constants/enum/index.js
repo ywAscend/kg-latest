@@ -1,6 +1,8 @@
 export const NAV_URL = ['newSong', 'rank', 'songList', 'singer']
 export const KG_API_URL = 'http://m.kugou.com'
+export const KG_SEARCH_API_URL = 'http://mobilecdn.kugou.com/'
 export const KG_DEV_APP_URL= '/api'
+export const KG_DEV_APP_SEARCH_URL= '/searinfo'
 export const URL_ENUM = {
     NEW_SONG: '/?json=true', //新歌列表
     //NEW_SONG: '/newSong' //新歌列表--server.js提供数据
@@ -12,5 +14,6 @@ export const URL_ENUM = {
     SINGER_INFO: '/singer/class&json=true', //歌手
     SINGER_LIST_INFO: '/singer/list', //歌手列表
     SINGER_LIST_DETAIL_INGO: '/singer/info', //歌手详情
-    
+    SEARCH_INFO: '/api/v3/search/song?format=json&page=1&pagesize=20&showtype=1',  //搜索
+    HOT_SEARCH_INFO: '/api/v3/search/hot?format=json&plat=0&count=30'
 }

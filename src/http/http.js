@@ -1,8 +1,21 @@
 import axios from 'axios'
-import {KG_API_URL,KG_DEV_APP_URL} from '../constants/enum'
+import {KG_API_URL,KG_DEV_APP_URL,KG_SEARCH_API_URL,KG_DEV_APP_SEARCH_URL} from '../constants/enum'
 import { message } from 'antd'
 import { ShowLoading, HideLoding } from '../components/loading'
 const { NODE_ENV } = process.env
+
+const configHooks = (config) => {
+    let {url,baseURL} = config
+    if( url.match(/\/api/g) && url.match(/\/api/ig).length>0){
+        if(NODE_ENV === 'development'){
+            baseURL = KG_DEV_APP_SEARCH_URL
+        } else {
+            baseURL = KG_SEARCH_API_URL
+        }
+        return Object.assign({},config,{baseURL})
+    }
+    return config
+}
 
 class Http {
     constructor() {
@@ -41,7 +54,7 @@ class Http {
         this.$http.interceptors.request.use((config) => {
             this.showLoading()
             //对配置进行拦截，比如添加token
-            const newConfig = config
+            const newConfig = configHooks(config)
             //模拟 获取token
             const token = ''
 

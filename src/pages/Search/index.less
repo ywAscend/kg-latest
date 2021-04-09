@@ -1,5 +1,5 @@
 .searchContent{
-    // border: 1px solid red;
+    overflow: hidden;
     background: #fbfbfb;
     .searchBox{
       height: 70px;
@@ -42,6 +42,21 @@
     }
     .searchResult{
       height: 100%;
-      border: 1px solid red;
+      display: flex;
+      flex-direction: column;
+      .totolNum{
+        height: 30px;
+        line-height: 30px;
+        background: #e6e6e6;
+        padding-left: 10px;
+        span{
+          color: #5d5d5d;
+          font-size: 14px;
+        }
+      }
+      .resultContent{
+        flex: 1;
+        overflow: auto;
+      }
     }
 }

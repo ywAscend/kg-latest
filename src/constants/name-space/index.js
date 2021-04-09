@@ -8,7 +8,8 @@ const NAME_SPACE = {
     SONG_LIST_DETAIL:'kg-songListDetail',
     SINGER:'kg-singer',
     SINGER_LIST: 'kg-singerList',
-    SINGER_LIST_Detail: 'kg-singerListDetail'
+    SINGER_LIST_Detail: 'kg-singerListDetail',
+    SEARCH:'kg-search'
 }
 
 export default NAME_SPACE

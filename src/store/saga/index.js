@@ -8,6 +8,8 @@ import songListDetailRoutine from '../routines/songListDetail'
 import singerRoutine from '../routines/singer'
 import singerListRoutine from '../routines/singerList'
 import singerListDetailRoutine from '../routines/singerListDetail'
+import searchRoutine from '../routines/search'
+
 import { getNewSongServerData } from '../../http/API/NewSong'
 import { getSongInfoData } from '../../http/API/SongInfo'
 import { getRankServerData } from '../../http/API/RANK'
@@ -16,7 +18,8 @@ import { getSongListServerData } from '../../http/API/SongList'
 import { getSongListDetailServerData } from '../../http/API/SongListDetail'
 import { getSingerInfoData } from '../../http/API/Singer'
 import { getSingerListServerData } from '../../http/API/SingerList'
-import { getSingerListDetailServerData} from '../../http/API/SingerListDetailInfo'
+import { getSingerListDetailServerData } from '../../http/API/SingerListDetailInfo'
+import { getSearchResultData } from '../../http/API/Search'
 
 function* watchHome() {
   yield takeLatest(homeRoutine.TRIGGER, fetchNewSongServerData)
@@ -175,19 +178,37 @@ function* getSingerListData({ classid }) {
 
 //singerListDetail
 function* watchSingerListDetail() {
-  yield takeLatest(singerListDetailRoutine,getSingerListDetailData)
+  yield takeLatest(singerListDetailRoutine, getSingerListDetailData)
 }
-function* getSingerListDetailData({singerId}){
+function* getSingerListDetailData({ singerId }) {
   try {
     yield put(singerListDetailRoutine.request())
-    const singerListDetailData = yield call(()=>getSingerListDetailServerData(singerId))
-    console.log('歌手列表详情',singerListDetailData)
+    const singerListDetailData = yield call(() => getSingerListDetailServerData(singerId))
+    console.log('歌手列表详情', singerListDetailData)
     yield put(singerListDetailRoutine.success(singerListDetailData))
     // yield put(videoRoutine.fulfill({ data: singerListDetailData.songs.list }))
   } catch (error) {
     yield put(singerListDetailRoutine.failure(error.message))
   } finally {
     yield put(singerRoutine.fulfill())
+  }
+}
+
+//search
+function* watchSearch() {
+  yield takeLatest(searchRoutine.TRIGGER, getSearchResult)
+}
+function* getSearchResult({ searchValue,callBack }) {
+  try {
+    yield put(searchRoutine.request())
+    const searchResult = yield call(() => getSearchResultData(searchValue))
+    console.log('搜索结果', searchResult)
+    yield put(searchRoutine.success({...searchResult,searchValue}))
+    typeof callBack === 'function' && callBack()
+  } catch (error) {
+    yield put(searchRoutine.failure(error.message))
+  } finally{
+    yield put(searchRoutine.fulfill())
   }
 }
 
@@ -201,6 +222,7 @@ export default function* rootSaga() {
     fork(wathSongListDetail),
     fork(watchSinger),
     fork(watchSingerList),
-    fork(watchSingerListDetail)
+    fork(watchSingerListDetail),
+    fork(watchSearch)
   ])
 }
