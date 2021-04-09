@@ -14,6 +14,6 @@ export const URL_ENUM = {
     SINGER_INFO: '/singer/class&json=true', //歌手
     SINGER_LIST_INFO: '/singer/list', //歌手列表
     SINGER_LIST_DETAIL_INGO: '/singer/info', //歌手详情
-    SEARCH_INFO: '/api/v3/search/song?format=json&page=1&pagesize=20&showtype=1',  //搜索
+    SEARCH_INFO: '/api/v3/search/song?format=json&pagesize=20&showtype=1',  //搜索
     HOT_SEARCH_INFO: '/api/v3/search/hot?format=json&plat=0&count=30'
 }

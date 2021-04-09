@@ -9,12 +9,19 @@ const initState = {
 const searchReducer = (state = initState, action) => {
     switch (action.type) {
         case searchRoutine.SUCCESS:
-            console.log(action)
+            if(state.searchValue && state.searchValue!== action.payload.searchValue){
+              return {
+                  ...state,
+                  searchValue:action.payload.searchValue,
+                  searchData: action.payload.data,
+                  searchResult: action.payload.data.info
+              }
+            }
             return {
                 ...state,
                 searchValue:action.payload.searchValue,
                 searchData: action.payload.data,
-                searchResult: action.payload.data.info
+                searchResult: [...state.searchResult,...action.payload.data.info]
             }
         case searchRoutine.FAILURE:
             return {

@@ -198,10 +198,10 @@ function* getSingerListDetailData({ singerId }) {
 function* watchSearch() {
   yield takeLatest(searchRoutine.TRIGGER, getSearchResult)
 }
-function* getSearchResult({ searchValue,callBack }) {
+function* getSearchResult({ searchValue,callBack,page }) {
   try {
     yield put(searchRoutine.request())
-    const searchResult = yield call(() => getSearchResultData(searchValue))
+    const searchResult = yield call(() => getSearchResultData(searchValue,page))
     console.log('搜索结果', searchResult)
     yield put(searchRoutine.success({...searchResult,searchValue}))
     typeof callBack === 'function' && callBack()
