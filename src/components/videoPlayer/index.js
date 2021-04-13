@@ -1,10 +1,16 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import withVideo from '../../hoc/with-video'
 import { PlayCircleOutlined, PauseCircleOutlined, ForwardOutlined, DownloadOutlined } from '@ant-design/icons'
 import './index.less'
 const VideoPlayer = props => {
-    const { handleTogglePlayMusic, NextMusic, playFlag, myRef, musicData, filter,handleDownLoadMusic } = props
+    const { handleTogglePlayMusic, NextMusic, playFlag, myRef, musicData, filter,handleDownLoadMusic,handleAutoPlayEnded} = props
     console.log('播放器组件加载了')
+    useEffect(()=>{
+        console.log(myRef.current.ended)
+        document.getElementById('audio').onended = ()=>{
+            handleAutoPlayEnded()
+        }
+    })
     return (
         <div className='musicPlayer'>
             <div className='info'>

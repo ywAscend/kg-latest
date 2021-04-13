@@ -35,6 +35,14 @@ const SearchPage = props => {
   }
 
   const handlePlayFlag = (index, hash) => {
+    
+    dispatch({
+      type: videoRoutine.FULFILL,
+      payload:{
+        data: searchResult
+      }
+    })
+
     setPlayFlag(true)
     //更新歌曲信息
     dispatch({

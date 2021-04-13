@@ -45,10 +45,18 @@ export default title => WrappedComponent => {
             })
         }
 
+        handleNextNum = (musicIndex,playDatas) => {
+            let nextNum = Number(musicIndex) + 1
+            let nextMusicIndex = nextNum >= playDatas.length ? 0 : nextNum
+            if(playDatas[nextMusicIndex].hasOwnProperty('group')){
+                return playDatas[nextMusicIndex].group.length>0 ?  this.handleNextNum(nextMusicIndex,playDatas) : nextMusicIndex
+            }
+            return nextMusicIndex
+        }
+        
         getNextMusicParam = () => {
             const { musicIndex, playDatas } = this.props
-            const nextNum = musicIndex + 1
-            const nextMusicIndex = nextNum >= playDatas.length ? 0 : nextNum
+            const nextMusicIndex = this.handleNextNum(musicIndex,playDatas)
             const nextHash = playDatas[nextMusicIndex].hash
 
             console.log('下一曲索引', nextMusicIndex, nextHash)
@@ -62,6 +70,22 @@ export default title => WrappedComponent => {
         handleNextMusic = () => {
             const { musicIndex, hash } = this.getNextMusicParam()
             this.props.nextMusic(musicIndex, hash)
+        }
+
+        handleAutoPlayEnded = () => {
+            this.setState({
+                playFlag: false
+            },()=>{
+                this.autoNextMusic()
+            })
+        }
+
+        autoNextMusic = () => {
+            this.setState({
+                playFlag:true
+            },()=>{
+                this.handleNextMusic()
+            })
         }
 
         //下载
@@ -78,7 +102,8 @@ export default title => WrappedComponent => {
                 myRef: this.myAudio,
                 musicData: this.props.playMusicInfo,
                 filter: this.urlFiter,
-                handleDownLoadMusic: this.handleDownLoadMusic
+                handleDownLoadMusic: this.handleDownLoadMusic,
+                handleAutoPlayEnded: this.handleAutoPlayEnded
             }
             return this.props.flag ? <WrappedComponent  {...mapMethodToProps} {...this.state} /> : null
         }
